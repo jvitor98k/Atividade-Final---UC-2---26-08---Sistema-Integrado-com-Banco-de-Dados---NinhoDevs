@@ -17,15 +17,21 @@ while True:
 
 
         disciplinas = conexaoBD.consultar("SELECT * FROM disciplina")
+        print("ID  | Nome da Disciplina ")
         for disciplina in disciplinas:
-            print("ID  | Nome da Disciplina ")
+            
             print(f"{disciplina[0]}   | {disciplina[1]}")
         op_disc = int(input("Digite o ID da Disciplina que deseja para vê mais informações: "))
-        escolha = conexaoBD.consultarComParametros("SELECT * FROM  turma where id_disciplina = %s", (op_disc,))
-        print('''
-        ID TURMA
+        nome_disc = conexaoBD.consultarComParametros("SELECT nome_disciplina FROM disciplina where id_disciplina = %s", (op_disc,))
+        escolha_disc = conexaoBD.consultarComParametros("SELECT * FROM  turma where id_disciplina = %s", (op_disc,))
+        escolha_prof = conexaoBD.consultarComParametros("SELECT * FROM  professor where id_professor = %s", (escolha_disc[0][3],))        
+        print(f'''
+        Nome da Disciplina: {nome_disc[0][0]}
+        ID TURMA: {escolha_disc[0][0]}      
+        Turno da Turma: {escolha_disc[0][1]}                 
+        Nome do Professor(a): {escolha_prof[0][1]}
 ''')
-
+        
 
     elif (op == 2):
         try:
