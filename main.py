@@ -20,8 +20,11 @@ while True:
         for disciplina in disciplinas:
             print("ID  | Nome da Disciplina ")
             print(f"{disciplina[0]}   | {disciplina[1]}")
-        # op = int(input("Digite o ID da Disciplina que deseja para vê mais informações: "))
-        # conexaoBD.consultarComParametros("SELECT * FROM ")
+        op_disc = int(input("Digite o ID da Disciplina que deseja para vê mais informações: "))
+        escolha = conexaoBD.consultarComParametros("SELECT * FROM  turma where id_disciplina = %s", (op_disc,))
+        print('''
+        ID TURMA
+''')
 
 
     elif (op == 2):
